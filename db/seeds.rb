@@ -5,12 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# require 'pry-byebug'
 
-puts "seeding leh 🌱"
-
+puts 'seeding leh 🌱'
+Restaurant.destroy_all
+cat = %w[chinese italian japanese french belgian]
 10.times do |a|
-  resto = Restaurant.new(name: Faker::Restaurant.name, address: Faker::Address.street_address, phone_number: Faker::PhoneNumber.phone_number)
-  puts "creating one restaurant: #{resto.name}"
+  @resto = Restaurant.create!(
+    name: Faker::Restaurant.name,
+    address: Faker::Address.street_address,
+    phone_number: Faker::PhoneNumber.phone_number,
+    category: cat.sample
+  )
+  puts "creating one restaurant: #{@resto.name} #{@resto.address} #{@resto.phone_number} #{@resto.category}"
+  # @resto.save
 end
-
-puts "seeding done 🌱"
+# binding.pry
+puts 'seeding done 🌱'
